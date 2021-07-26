@@ -37,7 +37,7 @@ const App = () => {
     const newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
-    if (mostVoted < newVotes[selected]) {
+    if (newVotes[mostVoted] < newVotes[selected]) {
         setMostVoted(selected)
     }
   };
