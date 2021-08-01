@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Filter = ({filter, handleFilter}) => (
   <div>Filter shown with <input onChange={handleFilter} value={filter} /></div>
@@ -29,20 +30,15 @@ const Person = ({person}) => (
 )
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', 
-      number: '012-3456789' 
-    },
-    { name: 'Ivana Hellas', 
-      number: '012-3456789' 
-    },
-    { name: 'Georg Brogh', 
-      number: '012-3456789' 
-    }
-  ])
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons').then(response => {
+      setPersons(response.data)
+  })},[])
 
   // Button Handlers
   const handleSubmit = (event) => {
