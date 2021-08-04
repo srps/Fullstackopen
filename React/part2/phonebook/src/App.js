@@ -49,10 +49,10 @@ const App = () => {
       name: newName,
       number: newNumber,
     };
-    const foundPerson = persons.find((person) => person.name === newName);
-    foundPerson === undefined
+    const existingPerson = persons.find((person) => person.name === newName);
+    existingPerson === undefined
       ? createPerson(newPerson)
-      : updatePerson({ ...foundPerson, number: newNumber });
+      : updatePerson({ ...existingPerson, number: newNumber });
   };
 
   const handleRemovePerson = (personToRemove) => {
@@ -67,10 +67,12 @@ const App = () => {
           );
         })
         .catch((error) => {
-          const personNotRemoved = persons.filter((person) =>
-            person.id === personToRemove.id ? true : false
-          )[0];
-          alert(`${personNotRemoved.name} could not be removed`);
+          const personNotRemoved = persons.find(
+            (person) => person.id === personToRemove.id
+          );
+          personNotRemoved === undefined
+            ? alert(error)
+            : alert(`${personNotRemoved.name} could not be removed`);
         });
     }
   };
