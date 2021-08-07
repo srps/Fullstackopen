@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 import personService from "./services/persons";
 
 const Filter = ({ filter, handleFilter }) => (
@@ -35,6 +36,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [message, setMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     personService.getAll().then((persons) => {
@@ -65,14 +68,21 @@ const App = () => {
               person.id !== personToRemove.id ? true : false
             )
           );
+          setMessage(`${personToRemove.name} removed from the Phonebook`)
+          setTimeout(() => {
+            setMessage(null)
+          },2000)
         })
         .catch((error) => {
           const personNotRemoved = persons.find(
             (person) => person.id === personToRemove.id
           );
           personNotRemoved === undefined
-            ? alert(error)
-            : alert(`${personNotRemoved.name} could not be removed`);
+            ? setErrorMessage(error)
+            : setErrorMessage(`${personNotRemoved.name} has already been removed from the Phonebook`);
+          setTimeout(() => {
+            setErrorMessage(null)
+          },5000)
         });
     }
   };
@@ -106,8 +116,17 @@ const App = () => {
         setPersons(persons.concat(returnedPerson));
         setNewName("");
         setNewNumber("");
+        setMessage(`${returnedPerson.name} added to the Phonebook`)
+          setTimeout(() => {
+            setMessage(null)
+          },2000)
       })
-      .catch((error) => alert(`${newName} is already in the Phonebook`));
+      .catch((error) => {
+        setErrorMessage(`${newName} is already in the Phonebook`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        },5000)
+      });
   };
 
   const updatePerson = (person) => {
@@ -127,6 +146,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} isError={true} />
+      <Notification message={message} isError={false}/>
       <Filter filter={newFilter} handleFilter={handleNewFilter} />
       <h2>Add a new</h2>
       <PersonsForm
