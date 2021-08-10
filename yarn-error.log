@@ -1,0 +1,41 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js set version Berry
+
+PATH: 
+  C:\Program Files\PowerShell\7;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\PowerShell\7\;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Users\sergi\scoop\apps\corretto\current\bin;C:\Users\sergi\scoop\shims;C:\Users\sergi\scoop\apps\python\current\Scripts;C:\Users\sergi\scoop\apps\python\current;C:\Users\sergi\linux_apps;C:\Users\sergi\AppData\Local\Microsoft\WindowsApps;C:\Users\sergi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sergi\AppData\Local\Yarn\bin;C:\Users\sergi\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  16.6.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: Release not found: Berry
+      at C:\Program Files (x86)\Yarn\lib\cli.js:86219:17
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+npm manifest: 
+  {
+    "name": "fullstackopen",
+    "version": "1.0.0",
+    "description": "FullStackOpen course",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
